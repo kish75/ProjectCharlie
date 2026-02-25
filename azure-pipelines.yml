@@ -13,10 +13,6 @@ stages:
     jobs:
       - job: Build
         steps:
-          - task: NodeTool@0
-            inputs:
-              versionSource: 'spec'
-              versionSpec: '20.x'
           - task: Npm@1
             inputs: 
               command: custom
