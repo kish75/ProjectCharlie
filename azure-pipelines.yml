@@ -1,0 +1,31 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  name:testagent
+
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        steps:
+          - task: Npm@1
+            inputs: 
+              command: custom
+              customCommand: 'install -D tailwindcss postcss autoprefixer'
+          - task: Npm@1
+            inputs:
+              command: custom
+              customCommand: 'run build'
+            
+          - task: Npm@1
+            inputs:
+              command: 'publish'
+              workingDir: './dist'
+              publishRegistry: 'useFeed'
+              publishFeed: '81626f81-bf4c-4304-96c7-a137170b8bc3/ec7758cc-606b-4e68-badc-06b9e605a5d3'
