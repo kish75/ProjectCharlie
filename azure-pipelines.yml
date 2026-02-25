@@ -28,9 +28,9 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'dist'
         publishLocation: 'Container'
-    - task: npmAuthenticate@0
-      inputs:
-       workingFile: .npmrc
+  #  - task: npmAuthenticate@0
+  #   inputs:
+   #    workingFile: .npmrc
         
     - task: Npm@1
       inputs:
