@@ -21,7 +21,10 @@ stages:
       inputs:
         command: 'custom'
         customCommand: 'run build'
-
+    - task: npmAuthenticate@0
+      inputs:
+       workingFile: .npmrc
+        
     - task: Npm@1
       inputs:
         command: 'publish'
