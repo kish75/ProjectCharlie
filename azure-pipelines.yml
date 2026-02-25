@@ -10,7 +10,7 @@ stages:
       - job: Build
         steps:
           - script: node -v
-          - script: npm install
+          - script: npm
           - task: Npm@1
             inputs: 
               command: custom
