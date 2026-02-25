@@ -28,10 +28,11 @@ stages:
         PathtoPublish: 'dist'
         ArtifactName: 'react-feed'
         publishLocation: 'Container'
-  #  - task: npmAuthenticate@0
-  #   inputs:
-   #    workingFile: .npmrc
-        
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: .npmrc
+
+          
     - task: Npm@1
       inputs:
         command: 'publish'
