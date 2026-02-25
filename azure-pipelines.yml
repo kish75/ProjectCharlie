@@ -3,20 +3,38 @@ trigger: none
 pool:
  name: 'testpool'
 
+variables: 
+  NodeVersion: '18.x'
 steps:
+
+# install node
   - task: NodeTool@0
-    inputs:
-      versionSpec: '18.x'
     displayName: 'Use Node.js'
-
-  - script: node -v
-  - script: npm -v
-
-  - task: Npm@1
     inputs:
-      command: custom
-      customCommand: 'install -D tailwindcss postcss autoprefixer'
+      versionSpec: '$(NodeVersion)'
+# Verify node & Npm
+  - task: PowerShell@2
+    displayName: 'Check node and npm version'
+    inputs:
+      targetType: inline
+      script: |
+        node -v
+        npm -v
+# Install Dependencies
+  - task: PowerShell@2
+    displayName: 'Install dependencies'
+    inputs:
+     targetType: inline
+     script: |
+       npm install
 
+#build project
+  - task: PowerShell@2
+    displayName: 'build  project'
+    inputs:
+      targetType: 'inline'
+      script: |
+        npm run build
   - task: Npm@1
     inputs:
       command: custom
