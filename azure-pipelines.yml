@@ -6,7 +6,7 @@
 trigger: none
 
 pool:
-  name: Ondemandpool
+  name: OndemandPool
 
 stages:
   - stage: Build
