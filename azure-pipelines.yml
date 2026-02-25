@@ -25,8 +25,8 @@ stages:
         
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'dist'
+        PathtoPublish: 'dist'
+        ArtifactName: 'react-feed'
         publishLocation: 'Container'
   #  - task: npmAuthenticate@0
   #   inputs:
@@ -36,4 +36,4 @@ stages:
       inputs:
         command: 'publish'
         publishRegistry: 'useFeed'
-        publishFeed: 'react feed'
+        publishFeed: 'react-feed'
