@@ -7,10 +7,16 @@ stages:
     pool:
       name: 'testpool'
     steps:
+
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+
     - task: Npm@1
       inputs:
         command: 'custom'
         customCommand: 'install -D tailwindcss postcss autoprefixer'
+
     - task: Npm@1
       inputs:
         command: 'custom'
