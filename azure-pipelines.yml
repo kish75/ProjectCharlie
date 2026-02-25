@@ -1,48 +1,24 @@
 trigger: none
 
-pool:
- name: 'testpool'
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      name: 'testpool'
+    steps:
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'install -D tailwindcss postcss autoprefixer'
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'run build'
 
-variables: 
-  NodeVersion: '18.x'
-steps:
-
-# install node
-  - task: NodeTool@0
-    displayName: 'Use Node.js'
-    inputs:
-      versionSpec: '$(NodeVersion)'
-# Verify node & Npm
-  - task: PowerShell@2
-    displayName: 'Check node and npm version'
-    inputs:
-      targetType: inline
-      script: |
-        node -v
-        npm -v
-# Install Dependencies
-  - task: PowerShell@2
-    displayName: 'Install dependencies'
-    inputs:
-     targetType: inline
-     script: |
-       npm install
-
-#build project
-  - task: PowerShell@2
-    displayName: 'build  project'
-    inputs:
-      targetType: 'inline'
-      script: |
-        npm run build
-  - task: Npm@1
-    inputs:
-      command: custom
-      customCommand: 'run build'
-
-  - task: Npm@1
-    inputs:
-      command: 'publish'
-      workingDir: './dist'
-      publishRegistry: 'useFeed'
-      publishFeed: '81626f81-bf4c-4304-96c7-a137170b8bc3/ec7758cc-606b-4e68-badc-06b9e605a5d3'
+    - task: Npm@1
+      inputs:
+        command: 'publish'
+        workingDir: './dist'
+        publishRegistry: 'useFeed'
+        publishFeed: '$FEED_DETAILS'
