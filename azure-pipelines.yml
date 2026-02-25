@@ -21,6 +21,15 @@ stages:
       inputs:
         command: 'custom'
         customCommand: 'run build'
+    - task: ArchiveFiles@2
+      displayName: ' Zip dist folder'
+      inputs:
+        rootFolderOrFile: 'dist'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/reactapp.zip'
+        replaceExistingArchive: true
+         
 
         
     - task: PublishBuildArtifacts@1
