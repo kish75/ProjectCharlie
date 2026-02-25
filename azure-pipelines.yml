@@ -29,17 +29,10 @@ stages:
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/reactapp.zip'
         replaceExistingArchive: true
-         
-
-        
+              
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: 'dist'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'react-feed'
         publishLocation: 'Container'
-          
-    - task: Npm@1
-      inputs:
-        command: 'publish'
-        publishRegistry: 'useFeed'
-        publishFeed: '81626f81-bf4c-4304-96c7-a137170b8bc3/ec7758cc-606b-4e68-badc-06b9e605a5d3'
+    
