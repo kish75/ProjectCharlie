@@ -16,7 +16,8 @@ stages:
         steps:
           - task: Npm@1
             inputs:
-              command: install
+              command: 'install'
+              workingDir: '.'
           - task: Npm@1
             inputs: 
               command: custom
