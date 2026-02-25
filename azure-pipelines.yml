@@ -1,28 +1,25 @@
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+    displayName: 'Use Node.js'
 
+  - script: node -v
+  - script: npm -v
 
-trigger: none
+  - task: Npm@1
+    inputs:
+      command: custom
+      customCommand: 'install -D tailwindcss postcss autoprefixer'
 
-pool:
-  name: testpool
-stages:
-  - stage: Build
-    jobs:
-      - job: Build
-        steps:
-          - script: node -v
-          - script: npm
-          - task: Npm@1
-            inputs: 
-              command: custom
-              customCommand: 'install -D tailwindcss postcss autoprefixer'
-          - task: Npm@1
-            inputs:
-              command: custom
-              customCommand: 'run build'
-            
-          - task: Npm@1
-            inputs:
-              command: 'publish'
-              workingDir: './dist'
-              publishRegistry: 'useFeed'
-              publishFeed: '81626f81-bf4c-4304-96c7-a137170b8bc3/ec7758cc-606b-4e68-badc-06b9e605a5d3'
+  - task: Npm@1
+    inputs:
+      command: custom
+      customCommand: 'run build'
+
+  - task: Npm@1
+    inputs:
+      command: 'publish'
+      workingDir: './dist'
+      publishRegistry: 'useFeed'
+      publishFeed: '81626f81-bf4c-4304-96c7-a137170b8bc3/ec7758cc-606b-4e68-badc-06b9e605a5d3'
