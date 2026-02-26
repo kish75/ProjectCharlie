@@ -12,6 +12,18 @@ stages:
       inputs:
         versionSpec: '18.x'
 
+# prepare sonar cloud
+    - task: SonarCloudPrepare@4
+      inputs:
+        SonarQube: 'sonar-connection'
+        organization: 'kish75'
+        scannerMode: 'cli'
+        configMode: 'manual'
+        cliProjectKey: 'kish75_ProjectCharlie'
+        cliProjectName: 'ProjectCharlie'
+        cliSources: '.'
+
+
     - task: Npm@1
       inputs:
         command: 'custom'
